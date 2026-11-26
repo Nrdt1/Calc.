@@ -1,373 +1,678 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>БортЖурнал</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f3efff;
-      --card-bg: #fff;
-      --text: #1f2937;
-      --text-muted: #6b7280;
-      --border: #e5e7eb;
-      --border-focus: #7c3aed;
-      --input-bg: #faf9ff;
-      --input-text: #111827;
-      --multi-bg: #f5f3ff;
-      --multi-border: #ddd6fe;
-      --chip-bg: #fff;
-      --header-grad: linear-gradient(135deg, #43188a 0%, #6324c7 60%, #7c3aed 100%);
-      --header-bg: rgba(24, 9, 54, 0.28);
-      --tab-active-bg: #fff;
-      --tab-active-text: #2e1065;
-      --shadow: rgba(91, 33, 182, 0.06);
+      --bg: #f4f5f8;
+      --card: #ffffff;
+      --card-border: #e5e7eb;
+      --divider: #f0f1f5;
+      --text: #111827;
+      --text-sec: #6b7280;
+      --text-mut: #9ca3af;
+      --pill-bg: #eef0f5;
+      --tab-active: #ffffff;
+      --tab-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --accent: #7c3aed;
+      --accent-soft: rgba(124, 58, 237, 0.1);
+      --accent-text: #6d28d9;
+      --green-soft: rgba(16, 185, 129, 0.12);
+      --green-text: #059669;
+      --green-btn: #10b981;
+      --red-soft: rgba(239, 68, 68, 0.11);
+      --red-text: #dc2626;
+      --amber-soft: rgba(245, 158, 11, 0.12);
+      --amber-text: #d97706;
+      --chip-bg: #f3f0ff;
+      --chip-border: #ddd6fe;
+      --input-pill: #f3f4f6;
     }
+
     [data-theme="dark"] {
-      --bg: #110c1c;
-      --card-bg: #1a1526;
-      --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --border: #332a45;
-      --border-focus: #a78bfa;
-      --input-bg: #221b30;
-      --input-text: #f8fafc;
-      --multi-bg: #1e162b;
-      --multi-border: #4c3e69;
-      --chip-bg: #2d2440;
-      --header-grad: linear-gradient(135deg, #1b0933 0%, #2e105e 60%, #43188a 100%);
-      --header-bg: rgba(10, 3, 23, 0.5);
-      --tab-active-bg: #43188a;
-      --tab-active-text: #ffffff;
-      --shadow: rgba(0, 0, 0, 0.25);
+      --bg: #0f0f13;
+      --card: #18181e;
+      --card-border: #262630;
+      --divider: #23232d;
+      --text: #f4f4f7;
+      --text-sec: #9ca3af;
+      --text-mut: #6b7280;
+      --pill-bg: #18181e;
+      --tab-active: #272733;
+      --tab-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      --accent: #8b5cf6;
+      --accent-soft: rgba(139, 92, 246, 0.16);
+      --accent-text: #c4b5fd;
+      --green-soft: rgba(16, 185, 129, 0.14);
+      --green-text: #34d399;
+      --green-btn: #10b981;
+      --red-soft: rgba(239, 68, 68, 0.14);
+      --red-text: #f87171;
+      --amber-soft: rgba(245, 158, 11, 0.14);
+      --amber-text: #fbbf24;
+      --chip-bg: rgba(139, 92, 246, 0.16);
+      --chip-border: rgba(139, 92, 246, 0.32);
+      --input-pill: #21212a;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background: var(--bg); color: var(--text); padding-bottom: 40px; transition: background 0.3s, color 0.3s; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-    /* Шапка */
-    .top-header {
-      background: var(--header-grad);
-      color: #fff;
-      padding: 14px 14px 16px;
-      border-bottom-left-radius: 24px;
-      border-bottom-right-radius: 24px;
-      box-shadow: 0 6px 20px rgba(76, 29, 149, 0.25);
+    body {
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 44px;
+      transition: background 0.25s, color 0.25s;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+
+    /* Чистая шапка */
+    .header-wrap {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 14px 12px;
     }
-    .header-inner { max-width: 500px; margin: 0 auto; }
-    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .brand { display: flex; align-items: center; gap: 8px; }
-    .brand-img {
+
+    .header-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .avatar {
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      background: #ede9fe;
-      border: 2px solid #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
+      border: 1.5px solid var(--card-border);
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .brand-img img { width: 100%; height: 100%; object-fit: cover; }
-    .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.1px; }
-    .header-actions { display: flex; align-items: center; gap: 6px; }
 
-    .btn-icon {
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      color: var(--text-sec);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: 0.2s;
     }
-    .btn-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
-    .btn-backup {
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 6px 10px;
-      font-size: 11.5px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
+    .theme-btn:active { transform: scale(0.94); }
+    .theme-btn svg { width: 18px; height: 18px; }
+
+    /* Сегментированные табы в стиле iOS */
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.15fr;
+      background: var(--pill-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 3px;
+      gap: 3px;
     }
-    .btn-backup svg { width: 14px; height: 14px; }
 
-    /* Табы */
-    .tabs { display: flex; background: var(--header-bg); border-radius: 14px; padding: 4px; gap: 4px; }
     .tab {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      padding: 9px 6px;
+      gap: 6px;
+      padding: 8px 6px;
       border-radius: 11px;
-      color: #ddd6fe;
-      font-weight: 600;
       font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sec);
       cursor: pointer;
       transition: all 0.2s;
     }
-    .tab.active { background: var(--tab-active-bg); color: var(--tab-active-text); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
-    .tab svg { width: 15px; height: 15px; flex-shrink: 0; }
 
-    .container { max-width: 500px; margin: 0 auto; padding: 12px; }
-
-    /* Дата / Маршрут / Водитель */
-    .meta-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 12px 14px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 10px var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .meta-row { display: flex; gap: 12px; align-items: center; }
-    .meta-col { display: flex; align-items: center; gap: 9px; min-width: 0; flex: 1; }
-    .meta-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
-    .meta-icon { color: var(--border-focus); flex-shrink: 0; display: flex; }
-    .meta-fields { display: flex; flex-direction: column; min-width: 0; width: 100%; }
-    .meta-label { font-size: 10px; color: var(--text-muted); margin-bottom: 1px; }
-    .meta-input {
-      border: none;
-      background: transparent;
-      font-size: 13px;
-      font-weight: 700;
+    .tab.active {
+      background: var(--tab-active);
       color: var(--text);
-      width: 100%;
-      padding: 1px 0;
-      outline: none;
+      box-shadow: var(--tab-shadow);
     }
-    .meta-input:focus { color: var(--border-focus); }
+
+    .tab svg { width: 15px; height: 15px; }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 14px 14px 0;
+    }
 
     /* Карточки */
     .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 14px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 6px 16px;
       margin-bottom: 12px;
-      box-shadow: 0 2px 10px var(--shadow);
     }
-    .card-header-bar {
-      margin: -14px -14px 12px -14px;
-      padding: 11px 14px;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
+
+    .card-padded {
+      padding: 14px 16px;
+    }
+
+    .section-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-sec);
+      padding: 12px 0 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
     }
-    .bar-purple { background: #ede9fe; color: #2e1065; }
-    [data-theme="dark"] .bar-purple { background: #2e1065; color: #ddd6fe; }
-    .bar-red { background: #fee2e2; color: #7f1d1d; }
-    [data-theme="dark"] .bar-red { background: #7f1d1d; color: #fee2e2; }
-    .bar-amber { background: #fef3c7; color: #78350f; }
-    [data-theme="dark"] .bar-amber { background: #78350f; color: #fef3c7; }
 
-    .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; gap: 8px; }
-    .row:last-child { margin-bottom: 0; }
-    .row label { font-size: 13.5px; color: var(--text); flex: 1; font-weight: 500; }
-    .row input {
-      width: 115px;
-      padding: 9px 10px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 14.5px;
-      text-align: right;
-      background: var(--input-bg);
-      color: var(--input-text);
+    /* Мета-карточка: Водитель / Дата / Маршрут */
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .meta-row + .meta-row {
+      border-top: 1px solid var(--divider);
+    }
+
+    .meta-split {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .meta-col {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .meta-col.date-col {
+      flex: 0 0 128px;
+    }
+
+    .v-div {
+      width: 1px;
+      height: 28px;
+      background: var(--divider);
+      flex-shrink: 0;
+    }
+
+    .meta-ic {
+      color: var(--accent);
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    .meta-field {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .meta-lbl {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-sec);
+      margin-bottom: 2px;
+    }
+
+    .meta-inp {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 13.5px;
       font-weight: 600;
+      width: 100%;
       outline: none;
+      padding: 0;
     }
-    .row input.text-input { width: 100%; text-align: left; font-weight: 400; }
-    .row input.inv-input { flex: 1; min-width: 0; width: auto; text-align: left; font-size: 13px; font-weight: 500; }
-    .row input.sum-sm { width: 95px; flex-shrink: 0; }
-    .row label.kons-lbl { flex: 0 0 65px; }
-    .row input:focus { border-color: var(--border-focus); }
 
-    .btn-calc-mini {
-      background: #7c3aed;
-      color: #fff;
+    .meta-inp:focus { color: var(--accent-text); }
+
+    /* Чистые строки списка без рамок вокруг каждого поля */
+    .list-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .list-row:last-of-type { border-bottom: none; }
+
+    .list-row label {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .list-row input[type="number"] {
+      width: 120px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 15.5px;
+      font-weight: 700;
+      text-align: right;
+      outline: none;
+      font-variant-numeric: tabular-nums;
+      padding: 2px 0;
+    }
+
+    .list-row input::placeholder {
+      color: var(--text-mut);
+      font-weight: 500;
+    }
+
+    .list-row input:focus {
+      color: var(--accent-text);
+    }
+
+    /* Поле номера накладной в Конс */
+    .inv-inp {
+      width: 82px;
+      border: none;
+      background: var(--input-pill);
+      color: var(--text);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 5px 8px;
+      border-radius: 8px;
+      outline: none;
+      text-align: center;
+    }
+
+    .inv-inp:focus {
+      box-shadow: 0 0 0 1.5px var(--accent);
+    }
+
+    .sum-sm {
+      width: 96px !important;
+      flex-shrink: 0;
+    }
+
+    .kons-lbl {
+      flex: 0 0 auto !important;
+      margin-right: auto;
+    }
+
+    /* Кнопка Калк рядом с ГСМ */
+    .btn-mini {
+      background: var(--accent-soft);
+      color: var(--accent-text);
       border: none;
       border-radius: 8px;
-      padding: 6px 10px;
+      padding: 5px 10px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
-    /* Мульти-блоки (QR, ИВ) */
-    .multi-block { background: var(--multi-bg); border-radius: 12px; padding: 10px; margin-bottom: 10px; }
-    .multi-header { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .multi-header span.sub { color: var(--border-focus); }
-    .qr-add { display: flex; gap: 8px; }
-    .qr-add input {
-      flex: 1;
-      padding: 9px 10px;
-      border: 1px solid var(--multi-border);
-      border-radius: 10px;
+    /* Мульти-блоки (Kaspi QR, ИВ) */
+    .multi-sec {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .multi-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .multi-name {
       font-size: 14.5px;
-      background: var(--card-bg);
-      color: var(--input-text);
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .multi-sub {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--accent-text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .multi-add {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .multi-add input {
+      flex: 1;
+      border: none;
+      background: var(--input-pill);
+      color: var(--text);
+      border-radius: 11px;
+      padding: 9px 12px;
+      font-size: 14.5px;
       font-weight: 600;
       outline: none;
+      font-variant-numeric: tabular-nums;
     }
-    .qr-add input:focus { border-color: var(--border-focus); }
-    .btn-add {
-      background: #6d28d9;
-      color: #fff;
+
+    .multi-add input:focus {
+      box-shadow: 0 0 0 1.5px var(--accent);
+    }
+
+    .btn-plus {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       border: none;
-      border-radius: 10px;
-      width: 44px;
+      background: var(--accent);
+      color: #fff;
       font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
+      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
     }
-    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+    .btn-plus:active { transform: scale(0.94); }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
     .chips:empty { margin-top: 0; }
+
     .chip {
       background: var(--chip-bg);
-      border: 1px solid var(--multi-border);
-      color: var(--text);
+      border: 1px solid var(--chip-border);
+      color: var(--accent-text);
       padding: 4px 10px;
       border-radius: 20px;
       font-size: 12.5px;
       font-weight: 600;
+      font-variant-numeric: tabular-nums;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .chip span { color: #ef4444; font-weight: bold; cursor: pointer; padding: 0 2px; }
 
-    /* ГСМ переключатель и результат */
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--multi-bg);
-      padding: 10px 12px;
-      border-radius: 10px;
-      margin-bottom: 10px;
+    .chip span {
+      color: var(--red-text);
       cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
     }
-    .toggle-row span { font-size: 13.5px; font-weight: 600; color: var(--text); }
-    .toggle-row input { width: 18px; height: 18px; accent-color: #7c3aed; }
 
-    .gsm-result-box {
-      background: var(--multi-bg);
-      border: 1px solid var(--multi-border);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 12px;
+    /* Спокойные итоговые пилюли */
+    .pill-total {
+      margin: 10px 0 8px;
+      padding: 12px 14px;
+      border-radius: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .pill-green { background: var(--green-soft); color: var(--green-text); }
+    .pill-red { background: var(--red-soft); color: var(--red-text); }
+
+    .pill-net {
+      margin: 10px 0 4px;
+      padding: 14px 15px;
+      border-radius: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--green-soft);
+      color: var(--green-text);
+    }
+
+    .pill-net.negative {
+      background: var(--red-soft);
+      color: var(--red-text);
+    }
+
+    .pill-net .net-lbl { font-size: 14.5px; font-weight: 700; }
+    .pill-net .net-val { font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+    .comment-inp {
+      width: 100%;
+      border: none;
+      background: var(--input-pill);
+      color: var(--text);
+      border-radius: 11px;
+      padding: 10px 12px;
+      font-size: 13.5px;
+      outline: none;
+      margin: 8px 0 8px;
+    }
+
+    .comment-inp:focus { box-shadow: 0 0 0 1.5px var(--accent); }
+
+    /* Основные кнопки */
+    .actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      text-align: center;
-    }
-    .gsm-stat-lbl { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
-    .gsm-stat-val { font-size: 17px; font-weight: 800; color: var(--border-focus); }
-
-    /* Плашки */
-    .total-pill {
       margin-top: 12px;
-      padding: 11px 14px;
-      border-radius: 12px;
-      color: #fff;
-      font-weight: 800;
-      font-size: 13px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
-    .pill-green { background: #169347; }
-    .pill-red { background: #dc3545; }
-    .pill-net { font-size: 15px; padding: 13px 14px; }
-    .pill-net.negative { background: #dc3545; }
 
-    .summary-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; color: var(--text); }
-    .summary-row strong { color: var(--text); }
-
-    /* Кнопки */
-    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
     .btn {
-      padding: 14px 10px;
+      padding: 14px 12px;
       border: none;
-      border-radius: 12px;
-      font-size: 13.5px;
+      border-radius: 14px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      gap: 7px;
+      transition: transform 0.15s;
     }
-    .btn-save { background: #6d28d9; }
-    .btn-wa { background: #169347; }
-    .btn-del { background: #ef4444; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; }
-    .btn-edit { background: #f59e0b; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; color: #fff; }
-    .btn-copy-sm { background: #169347; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; }
-    .btn-use { background: #6d28d9; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; }
 
-    /* Подвкладки истории */
-    .sub-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--accent); }
+    .btn-wa { background: var(--green-btn); }
+
+    /* ГСМ */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--divider);
+      cursor: pointer;
+    }
+
+    .toggle-row span { font-size: 14.5px; font-weight: 500; }
+    .toggle-row input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+    .gsm-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0 8px;
+    }
+
+    .stat-box {
+      background: var(--input-pill);
+      border-radius: 13px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-lbl { font-size: 11.5px; color: var(--text-sec); margin-bottom: 4px; font-weight: 500; }
+    .stat-val { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+    /* История и Бэкап */
+    .backup-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .btn-outline {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-outline svg { width: 15px; height: 15px; color: var(--accent); }
+
+    .sub-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
     .sub-tab {
-      flex: 1;
       text-align: center;
       padding: 9px;
-      border-radius: 10px;
-      background: var(--card-bg);
-      color: var(--text-muted);
-      font-weight: 700;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--text-sec);
       font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
-      border: 1px solid var(--border);
     }
-    .sub-tab.active { background: #6d28d9; color: #fff; border-color: #6d28d9; }
 
-    /* История */
-    .history-item { background: var(--card-bg); border-radius: 16px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 10px var(--shadow); }
-    .history-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .history-date { font-weight: 700; color: var(--border-focus); font-size: 14.5px; }
-    .history-net { font-weight: 800; color: #169347; font-size: 15.5px; }
-    .history-meta { font-size: 12.5px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; }
-    .history-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-    .hidden { display: none; }
+    .sub-tab.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .hist-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+
+    .hist-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .hist-date { font-size: 14.5px; font-weight: 700; color: var(--text); }
+    .hist-net { font-size: 16px; font-weight: 800; color: var(--green-text); font-variant-numeric: tabular-nums; }
+    .hist-meta { font-size: 13px; color: var(--text-sec); line-height: 1.55; margin-bottom: 12px; }
+    .hist-meta b { color: var(--text); font-weight: 600; }
+
+    .hist-btns { display: flex; gap: 7px; flex-wrap: wrap; }
+    .btn-sm {
+      padding: 7px 12px;
+      border-radius: 9px;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .sm-green { background: var(--green-soft); color: var(--green-text); }
+    .sm-amber { background: var(--amber-soft); color: var(--amber-text); }
+    .sm-red { background: var(--red-soft); color: var(--red-text); }
+    .sm-purple { background: var(--accent-soft); color: var(--accent-text); }
+
+    .hidden { display: none !important; }
 
     .toast {
       position: fixed;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      background: #1f2937;
+      background: #272733;
       color: #fff;
+      border: 1px solid #3a3a4a;
       padding: 10px 18px;
       border-radius: 20px;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.25s;
       pointer-events: none;
       z-index: 100;
       white-space: nowrap;
@@ -377,40 +682,41 @@
 </head>
 <body>
 
-<div class="top-header">
+<div class="header-wrap">
   <div class="header-inner">
     <div class="header-top">
       <div class="brand">
-        <div class="brand-img">
-          <img src="https://lh3.googleusercontent.com/d/1XyOisCmsU_K0l2qD4Iov3GgYQO-W58rN=s100-c" alt="Газель">
+        <div class="avatar">
+          <!-- Если закинешь фото своей Газели в репозиторий как gazel.jpg, замени src на "gazel.jpg" -->
+          <img src="gazel.jpg" alt="Газель" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <svg style="display:none; color:var(--accent);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
         </div>
         <h1>БортЖурнал</h1>
       </div>
-      <div class="header-actions">
-        <button class="btn-backup" onclick="exportData()" title="Скачать бэкап">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Бэкап</span>
-        </button>
-        <button class="btn-backup" onclick="importData()" title="Загрузить бэкап">Импорт</button>
-        <button class="btn-icon" onclick="toggleTheme()" id="themeBtn">
-          <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.3-9.7.5-.1 1 .2 1.1.7.1.5-.2 1-.7 1.1-3.6.6-6.2 3.7-6.2 7.4 0 4.1 3.4 7.5 7.5 7.5 3.7 0 6.8-2.6 7.4-6.2.1-.5.6-.8 1.1-.7.5.1.8.6.7 1.1-.8 4.8-4.9 8.3-9.7 8.3z"/></svg>
-          <svg id="sunIcon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
-      </div>
+
+      <button class="theme-btn" onclick="toggleTheme()" title="Сменить тему">
+        <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="moonIcon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
     </div>
 
     <div class="tabs">
       <div class="tab active" id="tabBtn-form" onclick="switchTab('form')">
-        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="10" width="4" height="10" rx="1"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 15v-4M12 15V9M16 15v-2"/></svg>
         <span>Рейс</span>
       </div>
       <div class="tab" id="tabBtn-gsm" onclick="switchTab('gsm')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M15 11h2a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2v0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 4"/><rect x="6" y="6" width="6" height="5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M15 11h2a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2v0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 4"/><rect x="6" y="6" width="6" height="5"/></svg>
         <span>ГСМ</span>
       </div>
       <div class="tab" id="tabBtn-history" onclick="switchTab('history')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
-        <span>История (<span id="histCount">0</span>)</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+        <span>История (<span id="histCount" class="num">0</span>)</span>
       </div>
     </div>
   </div>
@@ -418,186 +724,185 @@
 
 <!-- ВКЛАДКА 1: РЕЙС -->
 <div class="container" id="tab-form">
-  <div class="meta-card">
+  <!-- Водитель / Дата / Маршрут -->
+  <div class="card">
     <div class="meta-row">
       <div class="meta-col">
-        <div class="meta-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-          </svg>
+        <div class="meta-ic">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <div class="meta-fields">
-          <span class="meta-label">Водитель</span>
-          <input type="text" id="tripDriver" class="meta-input" value="Нурлан" placeholder="Имя водителя" oninput="saveDraft()">
+        <div class="meta-field">
+          <span class="meta-lbl">Водитель</span>
+          <input type="text" id="tripDriver" class="meta-inp" value="Нурлан" placeholder="Имя водителя" oninput="saveDraft()">
         </div>
       </div>
     </div>
 
-    <div style="height: 1px; background: var(--border);"></div>
-
     <div class="meta-row">
-      <div class="meta-col" style="flex: 0 0 115px;">
-        <div class="meta-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
+      <div class="meta-split">
+        <div class="meta-col date-col">
+          <div class="meta-ic">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="meta-field">
+            <span class="meta-lbl">Дата</span>
+            <input type="date" id="tripDate" class="meta-inp num" onchange="saveDraft()">
+          </div>
         </div>
-        <div class="meta-fields">
-          <span class="meta-label">Дата</span>
-          <input type="date" id="tripDate" class="meta-input" onchange="saveDraft()">
-        </div>
-      </div>
 
-      <div class="meta-divider"></div>
+        <div class="v-div"></div>
 
-      <div class="meta-col">
-        <div class="meta-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-        </div>
-        <div class="meta-fields">
-          <span class="meta-label">Маршрут</span>
-          <input type="text" id="tripRoute" class="meta-input" value="Жетісай — Ильич — Мырзакент" placeholder="Маршрут" oninput="saveDraft()">
+        <div class="meta-col">
+          <div class="meta-ic">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="meta-field">
+            <span class="meta-lbl">Маршрут</span>
+            <input type="text" id="tripRoute" class="meta-inp" value="Жетісай — Ильич — Мырзакент" placeholder="Маршрут" oninput="saveDraft()">
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Св/н (справочно) -->
-  <div class="card" style="padding: 11px 14px;">
-    <div class="row">
-      <label style="font-weight:700; color: var(--border-focus);">Св/н (сводная накладная)</label>
-      <input type="number" id="tripSvn" placeholder="0" inputmode="numeric" oninput="saveDraft()">
+  <div class="card">
+    <div class="list-row">
+      <label style="color: var(--accent-text); font-weight: 600;">Св/н <span style="font-size:12px; color:var(--text-sec); font-weight:400;">(сводная)</span></label>
+      <input type="number" id="tripSvn" placeholder="0 ₸" inputmode="numeric" oninput="saveDraft()">
     </div>
   </div>
 
   <!-- 1. Поступления -->
   <div class="card">
-    <div class="card-header-bar bar-purple">
-      <span>1. ПОСТУПЛЕНИЯ</span>
+    <div class="section-title">
+      <span>1. Поступления</span>
     </div>
 
-    <div class="multi-block">
-      <div class="multi-header">
-        <span>Kaspi QR (чеки)</span>
-        <span class="sub" id="sub-qr">0 ₸</span>
+    <div class="multi-sec">
+      <div class="multi-head">
+        <span class="multi-name">Kaspi QR</span>
+        <span class="multi-sub" id="sub-qr">0 ₸</span>
       </div>
-      <div class="qr-add">
+      <div class="multi-add">
         <input type="number" id="inp-qr" placeholder="Сумма чека" inputmode="numeric" onkeypress="if(event.key==='Enter') addItem('qr')">
-        <button class="btn-add" onclick="addItem('qr')">+</button>
+        <button class="btn-plus" onclick="addItem('qr')">+</button>
       </div>
       <div class="chips" id="chips-qr"></div>
     </div>
 
-    <div class="multi-block">
-      <div class="multi-header">
-        <span>ИВ Kaspi</span>
-        <span class="sub" id="sub-ivKaspi">0 ₸</span>
+    <div class="multi-sec">
+      <div class="multi-head">
+        <span class="multi-name">ИВ Kaspi</span>
+        <span class="multi-sub" id="sub-ivKaspi">0 ₸</span>
       </div>
-      <div class="qr-add">
+      <div class="multi-add">
         <input type="number" id="inp-ivKaspi" placeholder="Сумма ИВ Kaspi" inputmode="numeric" onkeypress="if(event.key==='Enter') addItem('ivKaspi')">
-        <button class="btn-add" onclick="addItem('ivKaspi')">+</button>
+        <button class="btn-plus" onclick="addItem('ivKaspi')">+</button>
       </div>
       <div class="chips" id="chips-ivKaspi"></div>
     </div>
 
-    <div class="multi-block">
-      <div class="multi-header">
-        <span>ИВ терминал</span>
-        <span class="sub" id="sub-ivTerm">0 ₸</span>
+    <div class="multi-sec">
+      <div class="multi-head">
+        <span class="multi-name">ИВ терминал</span>
+        <span class="multi-sub" id="sub-ivTerm">0 ₸</span>
       </div>
-      <div class="qr-add">
+      <div class="multi-add">
         <input type="number" id="inp-ivTerm" placeholder="Сумма ИВ терминал" inputmode="numeric" onkeypress="if(event.key==='Enter') addItem('ivTerm')">
-        <button class="btn-add" onclick="addItem('ivTerm')">+</button>
+        <button class="btn-plus" onclick="addItem('ivTerm')">+</button>
       </div>
       <div class="chips" id="chips-ivTerm"></div>
     </div>
 
-    <div class="row">
+    <div class="list-row">
       <label class="kons-lbl">Конс №1</label>
-      <input type="text" id="kons1Inv" class="inv-input" placeholder="№ накл." oninput="saveDraft()">
-      <input type="number" class="inc sum-sm" data-name="Конс №1" placeholder="Сумма" inputmode="numeric" oninput="calc()">
+      <input type="text" id="kons1Inv" class="inv-inp" placeholder="№ накл." oninput="saveDraft()">
+      <input type="number" class="inc sum-sm" data-name="Конс №1" placeholder="0 ₸" inputmode="numeric" oninput="calc()">
     </div>
-    <div class="row">
+    <div class="list-row">
       <label class="kons-lbl">Конс №2</label>
-      <input type="text" id="kons2Inv" class="inv-input" placeholder="№ накл." oninput="saveDraft()">
-      <input type="number" class="inc sum-sm" data-name="Конс №2" placeholder="Сумма" inputmode="numeric" oninput="calc()">
+      <input type="text" id="kons2Inv" class="inv-inp" placeholder="№ накл." oninput="saveDraft()">
+      <input type="number" class="inc sum-sm" data-name="Конс №2" placeholder="0 ₸" inputmode="numeric" oninput="calc()">
     </div>
-    <div class="row">
+    <div class="list-row">
       <label>Шеф Терминал</label>
-      <input type="number" class="inc" data-name="Шеф Терминал" placeholder="0" inputmode="numeric" oninput="calc()">
+      <input type="number" class="inc" data-name="Шеф Терминал" placeholder="0 ₸" inputmode="numeric" oninput="calc()">
     </div>
 
-    <div class="total-pill pill-green">
-      <span>ИТОГО ПОСТУПЛЕНИЙ</span>
-      <span id="incTotalHeader">0 ₸</span>
+    <div class="pill-total pill-green">
+      <span>Итого поступлений</span>
+      <span id="incTotalHeader" class="num">0 ₸</span>
     </div>
   </div>
 
   <!-- 2. Расходы -->
   <div class="card">
-    <div class="card-header-bar bar-red">
-      <span>2. РАСХОДЫ</span>
+    <div class="section-title">
+      <span>2. Расходы</span>
     </div>
-    <div class="row">
+    <div class="list-row">
       <label>ГСМ</label>
-      <button class="btn-calc-mini" onclick="switchTab('gsm')">Калк</button>
-      <input type="number" id="expGsmInput" class="exp" data-name="ГСМ" placeholder="0" inputmode="numeric" oninput="calc()">
+      <button class="btn-mini" onclick="switchTab('gsm')">Калк</button>
+      <input type="number" id="expGsmInput" class="exp sum-sm" data-name="ГСМ" placeholder="0 ₸" inputmode="numeric" oninput="calc()">
     </div>
-    <div class="row"><label>Платная дорога</label><input type="number" class="exp" data-name="Платная дорога" placeholder="0" inputmode="numeric" oninput="calc()"></div>
-    <div class="row"><label>Обед</label><input type="number" class="exp" data-name="Обед" placeholder="0" inputmode="numeric" oninput="calc()"></div>
-    <div class="row"><label>Тачка</label><input type="number" class="exp" data-name="Тачка" placeholder="0" inputmode="numeric" oninput="calc()"></div>
-    <div class="row"><label>Стоянка</label><input type="number" class="exp" data-name="Стоянка" placeholder="0" inputmode="numeric" oninput="calc()"></div>
-    <div class="row"><label>Такси</label><input type="number" class="exp" data-name="Такси" placeholder="0" inputmode="numeric" oninput="calc()"></div>
-    <div class="row"><label>Прочее</label><input type="number" class="exp" data-name="Прочее" placeholder="0" inputmode="numeric" oninput="calc()"></div>
+    <div class="list-row"><label>Платная дорога</label><input type="number" class="exp" data-name="Платная дорога" placeholder="0 ₸" inputmode="numeric" oninput="calc()"></div>
+    <div class="list-row"><label>Обед</label><input type="number" class="exp" data-name="Обед" placeholder="0 ₸" inputmode="numeric" oninput="calc()"></div>
+    <div class="list-row"><label>Тачка</label><input type="number" class="exp" data-name="Тачка" placeholder="0 ₸" inputmode="numeric" oninput="calc()"></div>
+    <div class="list-row"><label>Стоянка</label><input type="number" class="exp" data-name="Стоянка" placeholder="0 ₸" inputmode="numeric" oninput="calc()"></div>
+    <div class="list-row"><label>Такси</label><input type="number" class="exp" data-name="Такси" placeholder="0 ₸" inputmode="numeric" oninput="calc()"></div>
+    <div class="list-row"><label>Прочее</label><input type="number" class="exp" data-name="Прочее" placeholder="0 ₸" inputmode="numeric" oninput="calc()"></div>
 
-    <div class="total-pill pill-red">
-      <span>ИТОГО РАСХОДОВ</span>
-      <span id="expTotalHeader">0 ₸</span>
+    <div class="pill-total pill-red">
+      <span>Итого расходов</span>
+      <span id="expTotalHeader" class="num">0 ₸</span>
     </div>
   </div>
 
   <!-- Сумма возврата (справочно) -->
-  <div class="card" style="padding: 12px 14px;">
-    <div class="row">
-      <label style="font-weight:700; color:#d97706;">Сумма возврата (справочно)</label>
-      <input type="number" id="returnSum" placeholder="0" inputmode="numeric" oninput="saveDraft()">
+  <div class="card">
+    <div class="list-row">
+      <label style="color: var(--amber-text); font-weight: 600;">Сумма возврата</label>
+      <input type="number" id="returnSum" placeholder="0 ₸" inputmode="numeric" oninput="saveDraft()">
     </div>
   </div>
 
   <!-- 3. Итог рейса -->
   <div class="card">
-    <div class="card-header-bar bar-purple">
-      <span>3. ИТОГ РЕЙСА</span>
+    <div class="section-title">
+      <span>3. Итог рейса</span>
     </div>
-    <div class="summary-row"><span>Всего поступлений</span><strong id="sumInc">0 ₸</strong></div>
-    <div class="summary-row"><span>Всего расходов</span><strong id="sumExp">0 ₸</strong></div>
+    <div class="list-row">
+      <label style="color:var(--text-sec);">Всего поступлений</label>
+      <strong id="sumInc" class="num" style="font-size:15px;">0 ₸</strong>
+    </div>
+    <div class="list-row">
+      <label style="color:var(--text-sec);">Всего расходов</label>
+      <strong id="sumExp" class="num" style="font-size:15px;">0 ₸</strong>
+    </div>
 
-    <div class="total-pill pill-green pill-net" id="netRow">
-      <span>ЧИСТЫМИ (Остаток)</span>
-      <span id="sumNet">0 ₸</span>
+    <div class="pill-net" id="netRow">
+      <span class="net-lbl">Чистыми</span>
+      <span id="sumNet" class="net-val">0 ₸</span>
     </div>
 
-    <div class="row" style="margin-top:12px;">
-      <input type="text" id="tripComment" class="text-input" placeholder="Комментарий (если нужно)" oninput="saveDraft()">
-    </div>
+    <input type="text" id="tripComment" class="comment-inp" placeholder="Комментарий к рейсу..." oninput="saveDraft()">
   </div>
 
   <div class="actions">
-    <button class="btn btn-save" onclick="saveTrip()">Сохранить рейс</button>
-    <button class="btn btn-wa" onclick="copyCurrentWA()">В WhatsApp</button>
+    <button class="btn btn-primary" onclick="saveTrip()">Сохранить рейс</button>
+    <button class="btn btn-wa" onclick="copyCurrentWA()">WhatsApp</button>
   </div>
 </div>
 
 <!-- ВКЛАДКА 2: КАЛЬКУЛЯТОР ГСМ -->
 <div class="container hidden" id="tab-gsm">
   <div class="card">
-    <div class="card-header-bar bar-amber">
-      <span>⛽ КАЛЬКУЛЯТОР ГСМ</span>
+    <div class="section-title">
+      <span>Калькулятор ГСМ</span>
     </div>
 
-    <div class="row">
+    <div class="list-row">
       <label>Расстояние (км)</label>
       <input type="number" id="gsmDist" placeholder="0" inputmode="decimal" oninput="calcGsm()">
     </div>
@@ -607,39 +912,50 @@
       <input type="checkbox" id="gsmRound" onchange="calcGsm()">
     </label>
 
-    <div class="row">
+    <div class="list-row">
       <label>Расход (л / 100 км)</label>
       <input type="number" id="gsmCons" placeholder="15" inputmode="decimal" oninput="calcGsm()">
     </div>
 
-    <div class="row">
+    <div class="list-row">
       <label>Цена топлива (₸ / л)</label>
       <input type="number" id="gsmPrice" placeholder="205" inputmode="decimal" oninput="calcGsm()">
     </div>
 
-    <div class="gsm-result-box">
-      <div>
-        <div class="gsm-stat-lbl">Нужно топлива</div>
-        <div class="gsm-stat-val" id="gsmLiters">0 л</div>
+    <div class="gsm-stats">
+      <div class="stat-box">
+        <div class="stat-lbl">Нужно топлива</div>
+        <div class="stat-val" id="gsmLiters" style="color:var(--accent-text);">0.0 л</div>
       </div>
-      <div>
-        <div class="gsm-stat-lbl">Стоимость ГСМ</div>
-        <div class="gsm-stat-val" id="gsmCost" style="color:#169347;">0 ₸</div>
+      <div class="stat-box">
+        <div class="stat-lbl">Стоимость ГСМ</div>
+        <div class="stat-val" id="gsmCost" style="color:var(--green-text);">0 ₸</div>
       </div>
     </div>
 
-    <div class="actions">
-      <button class="btn btn-wa" onclick="addGsmToTrip()">В расходы рейса</button>
-      <button class="btn btn-save" onclick="saveGsm()">Сохранить расчёт</button>
+    <div class="actions" style="margin-bottom:10px;">
+      <button class="btn btn-wa" onclick="addGsmToTrip()">В расходы</button>
+      <button class="btn btn-primary" onclick="saveGsm()">Сохранить</button>
     </div>
   </div>
 </div>
 
 <!-- ВКЛАДКА 3: ИСТОРИЯ -->
 <div class="container hidden" id="tab-history">
+  <div class="backup-bar">
+    <button class="btn-outline" onclick="exportData()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Скачать бэкап</span>
+    </button>
+    <button class="btn-outline" onclick="importData()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <span>Загрузить бэкап</span>
+    </button>
+  </div>
+
   <div class="sub-tabs">
-    <div class="sub-tab active" id="subTab-trips" onclick="switchHistSub('trips')">Рейсы (<span id="tripHistCount">0</span>)</div>
-    <div class="sub-tab" id="subTab-gsm" onclick="switchHistSub('gsm')">ГСМ (<span id="gsmHistCount">0</span>)</div>
+    <div class="sub-tab active" id="subTab-trips" onclick="switchHistSub('trips')">Рейсы (<span id="tripHistCount" class="num">0</span>)</div>
+    <div class="sub-tab" id="subTab-gsm" onclick="switchHistSub('gsm')">ГСМ (<span id="gsmHistCount" class="num">0</span>)</div>
   </div>
   <div id="historyList"></div>
 </div>
@@ -661,21 +977,19 @@
     setTimeout(() => t.classList.remove('show'), 2000);
   }
 
-  // Тёмная тема
-  function toggleTheme() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    document.getElementById('moonIcon').classList.toggle('hidden', !isDark);
-    document.getElementById('sunIcon').classList.toggle('hidden', isDark);
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  function applyTheme(mode) {
+    document.documentElement.setAttribute('data-theme', mode);
+    document.getElementById('sunIcon').classList.toggle('hidden', mode !== 'dark');
+    document.getElementById('moonIcon').classList.toggle('hidden', mode === 'dark');
+    localStorage.setItem('theme', mode);
   }
 
-  if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('moonIcon').classList.add('hidden');
-    document.getElementById('sunIcon').classList.remove('hidden');
+  function toggleTheme() {
+    const cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
   }
+
+  applyTheme(localStorage.getItem('theme') || 'dark');
 
   function switchTab(tab) {
     ['form', 'gsm', 'history'].forEach(t => {
@@ -692,7 +1006,6 @@
     renderHistory();
   }
 
-  // --- РЕЙС ---
   function addItem(key) {
     const inp = document.getElementById('inp-' + key);
     const val = parseFloat(inp.value);
@@ -712,7 +1025,7 @@
   function renderChips(key) {
     const box = document.getElementById('chips-' + key);
     box.innerHTML = lists[key].map((v, i) =>
-      `<div class="chip">${v.toLocaleString('ru-RU')} <span onclick="removeItem('${key}', ${i})">×</span></div>`
+      `<div class="chip">${v.toLocaleString('ru-RU')} ₸ <span onclick="removeItem('${key}', ${i})">×</span></div>`
     ).join('');
     document.getElementById('sub-' + key).textContent = fmt(sumArr(lists[key]));
   }
@@ -796,14 +1109,30 @@
       } catch (e) {}
     }
 
-    // Загрузка сохранённых настроек ГСМ
     const gsmPrefs = JSON.parse(localStorage.getItem('gsm_prefs') || '{}');
     if (gsmPrefs.cons) document.getElementById('gsmCons').value = gsmPrefs.cons;
     if (gsmPrefs.price) document.getElementById('gsmPrice').value = gsmPrefs.price;
     calcGsm();
   }
 
-  // --- КАЛЬКУЛЯТОР ГСМ ---
+  function clearForm() {
+    editingId = null;
+    lists = { qr: [], ivKaspi: [], ivTerm: [] };
+    ['qr', 'ivKaspi', 'ivTerm'].forEach(key => {
+      renderChips(key);
+      const inp = document.getElementById('inp-' + key);
+      if (inp) inp.value = '';
+    });
+    document.querySelectorAll('.inc, .exp').forEach(el => el.value = '');
+    ['tripSvn', 'kons1Inv', 'kons2Inv', 'returnSum', 'tripComment'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    document.getElementById('tripDate').value = new Date().toISOString().split('T')[0];
+    localStorage.removeItem('trip_draft_v3');
+    calc();
+  }
+
   function getGsmData() {
     const dist = parseFloat(document.getElementById('gsmDist').value) || 0;
     const round = document.getElementById('gsmRound').checked;
@@ -841,7 +1170,6 @@
     showToast('Расчёт ГСМ сохранён!');
   }
 
-  // --- WHATSAPP ---
   function formatMultiLine(label, arr) {
     if (!arr || !arr.length) return '';
     const total = sumArr(arr);
@@ -851,7 +1179,7 @@
 
   function formatWA(d) {
     let txt = `🚚 *ОТЧЁТ О РЕЙСЕ*\n👤 Водитель: ${d.driver || 'Не указан'}\n📅 Дата: ${d.date}\n📍 Маршрут: ${d.route}\n`;
-    if (d.svn) txt += `💵 Св/н (справочно): ${fmt(d.svn)}\n`;
+    if (d.svn) txt += `💵 Св/н: ${fmt(d.svn)}\n`;
     txt += `\n💰 *ПОСТУПЛЕНИЯ: ${fmt(d.incTotal)}*\n`;
     txt += formatMultiLine('Kaspi QR', d.qrList);
     txt += formatMultiLine('ИВ Kaspi', d.ivKaspiList);
@@ -870,7 +1198,7 @@
     for (const [k, v] of Object.entries(d.exp || {})) txt += `• ${k}: ${fmt(v)}\n`;
 
     txt += `\n✅ *ЧИСТЫМИ: ${fmt(d.net)}*`;
-    if (d.returnSum) txt += `\n↩️ Сумма возврата (справочно): ${fmt(d.returnSum)}`;
+    if (d.returnSum) txt += `\n↩️ Сумма возврата: ${fmt(d.returnSum)}`;
     if (d.comment) txt += `\n📝 Комментарий: ${d.comment}`;
     return txt;
   }
@@ -895,7 +1223,6 @@
 
   function copyCurrentWA() { copyText(formatWA(getFormData())); }
 
-  // --- БЭКАП (РЕЙСЫ + ГСМ) ---
   function exportData() {
     const payload = {
       trips: JSON.parse(localStorage.getItem('trip_history') || '[]'),
@@ -939,41 +1266,27 @@
     reader.readAsText(file);
   }
 
-  // --- СОХРАНЕНИЕ И ИСТОРИЯ ---
   function saveTrip() {
     const d = getFormData();
-    if (d.incTotal === 0 && d.expTotal === 0 && d.returnSum === 0) {
+    if (d.incTotal === 0 && d.expTotal === 0 && d.returnSum === 0 && d.svn === 0) {
       showToast('Сначала введи хоть какие-то суммы');
       return;
     }
     let hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
     if (editingId) {
       hist = hist.map(x => x.id === editingId ? d : x);
-      editingId = null;
       showToast('Рейс обновлён!');
     } else {
       hist.unshift(d);
       showToast('Рейс сохранён!');
     }
     localStorage.setItem('trip_history', JSON.stringify(hist));
-
-    lists = { qr: [], ivKaspi: [], ivTerm: [] };
-    ['qr', 'ivKaspi', 'ivTerm'].forEach(renderChips);
-    document.querySelectorAll('.inc, .exp').forEach(el => el.value = '');
-    document.getElementById('tripSvn').value = '';
-    document.getElementById('kons1Inv').value = '';
-    document.getElementById('kons2Inv').value = '';
-    document.getElementById('returnSum').value = '';
-    document.getElementById('tripComment').value = '';
-    document.getElementById('tripDate').value = new Date().toISOString().split('T')[0];
-    localStorage.removeItem('trip_draft_v3');
-    calc();
+    clearForm();
     updateHistCount();
   }
 
   function editTrip(id) {
-    const hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
-    const d = hist.find(x => x.id === id);
+    const d = JSON.parse(localStorage.getItem('trip_history') || '[]').find(x => x.id === id);
     if (!d) return;
 
     editingId = d.id;
@@ -1034,49 +1347,49 @@
     if (currentHistSub === 'trips') {
       const hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
       if (!hist.length) {
-        box.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:30px;">История рейсов пока пустая</div>';
+        box.innerHTML = '<div style="text-align:center; color: var(--text-sec); padding:34px; font-size:14px;">История рейсов пока пустая</div>';
         return;
       }
       box.innerHTML = hist.map(d => `
-        <div class="history-item">
-          <div class="history-top">
-            <span class="history-date">${d.date} (${d.driver || 'Водитель'})</span>
-            <span class="history-net">${fmt(d.net)}</span>
+        <div class="hist-card">
+          <div class="hist-top">
+            <span class="hist-date">${d.date} · ${d.driver || 'Водитель'}</span>
+            <span class="hist-net">${fmt(d.net)}</span>
           </div>
-          <div class="history-meta">
-            📍 ${d.route}<br>
-            Поступления: <b>${fmt(d.incTotal)}</b> | Расходы: <b>${fmt(d.expTotal)}</b>
+          <div class="hist-meta">
+            ${d.route}<br>
+            Поступления: <b>${fmt(d.incTotal)}</b> · Расходы: <b>${fmt(d.expTotal)}</b>
             ${d.svn ? '<br>Св/н: <b>' + fmt(d.svn) + '</b>' : ''}
             ${d.returnSum ? '<br>Возврат: <b>' + fmt(d.returnSum) + '</b>' : ''}
-            ${d.kons1Inv ? '<br>Конс №1 накл.: <b>' + d.kons1Inv + '</b>' : ''}
-            ${d.kons2Inv ? '<br>Конс №2 накл.: <b>' + d.kons2Inv + '</b>' : ''}
+            ${d.kons1Inv ? '<br>Конс №1 накл.: <b>№' + d.kons1Inv + '</b>' : ''}
+            ${d.kons2Inv ? '<br>Конс №2 накл.: <b>№' + d.kons2Inv + '</b>' : ''}
             ${d.comment ? '<br>📝 ' + d.comment : ''}
           </div>
-          <div class="history-btns">
-            <button class="btn btn-copy-sm" onclick="copyHistWA(${d.id})">В WhatsApp</button>
-            <button class="btn btn-edit" onclick="editTrip(${d.id})">Изменить</button>
-            <button class="btn btn-del" onclick="deleteTrip(${d.id})">Удалить</button>
+          <div class="hist-btns">
+            <button class="btn-sm sm-green" onclick="copyHistWA(${d.id})">WhatsApp</button>
+            <button class="btn-sm sm-amber" onclick="editTrip(${d.id})">Изменить</button>
+            <button class="btn-sm sm-red" onclick="deleteTrip(${d.id})">Удалить</button>
           </div>
         </div>
       `).join('');
     } else {
       const hist = JSON.parse(localStorage.getItem('gsm_history') || '[]');
       if (!hist.length) {
-        box.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:30px;">История ГСМ пока пустая</div>';
+        box.innerHTML = '<div style="text-align:center; color: var(--text-sec); padding:34px; font-size:14px;">История ГСМ пока пустая</div>';
         return;
       }
       box.innerHTML = hist.map(g => `
-        <div class="history-item">
-          <div class="history-top">
-            <span class="history-date">${g.date} • ${g.totalDist} км ${g.round ? '(×2)' : ''}</span>
-            <span class="history-net">${fmt(g.cost)}</span>
+        <div class="hist-card">
+          <div class="hist-top">
+            <span class="hist-date">${g.date} · ${g.totalDist} км ${g.round ? '(×2)' : ''}</span>
+            <span class="hist-net">${fmt(g.cost)}</span>
           </div>
-          <div class="history-meta">
+          <div class="hist-meta">
             Топливо: <b>${g.liters.toFixed(1)} л</b> (расход ${g.cons} л/100км по ${g.price} ₸)
           </div>
-          <div class="history-btns">
-            <button class="btn btn-use" onclick="addGsmToTrip(${g.cost})">В рейс</button>
-            <button class="btn btn-del" onclick="deleteGsm(${g.id})">Удалить</button>
+          <div class="hist-btns">
+            <button class="btn-sm sm-purple" onclick="addGsmToTrip(${g.cost})">В рейс</button>
+            <button class="btn-sm sm-red" onclick="deleteGsm(${g.id})">Удалить</button>
           </div>
         </div>
       `).join('');
