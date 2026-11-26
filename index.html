@@ -45,7 +45,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background: var(--bg); color: var(--text); padding-bottom: 40px; transition: background 0.3s, color 0.3s; }
 
-    /* Шапка по макету */
+    /* Шапка */
     .top-header {
       background: var(--header-grad);
       color: #fff;
@@ -73,36 +73,36 @@
     }
     .brand-img img { width: 100%; height: 100%; object-fit: cover; }
     .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.1px; }
-    .header-actions { display: flex; align-items: center; gap: 8px; }
-    
+    .header-actions { display: flex; align-items: center; gap: 6px; }
+
     .btn-icon {
       background: rgba(255, 255, 255, 0.18);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
-    .btn-icon svg { width: 20px; height: 20px; fill: currentColor; }
-    
+    .btn-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
     .btn-backup {
       background: rgba(255, 255, 255, 0.18);
       color: #fff;
       border: none;
-      border-radius: 12px;
-      padding: 6px 12px;
+      border-radius: 10px;
+      padding: 6px 10px;
       font-size: 11.5px;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       cursor: pointer;
     }
-    .btn-backup svg { width: 15px; height: 15px; }
+    .btn-backup svg { width: 14px; height: 14px; }
 
     /* Табы */
     .tabs { display: flex; background: var(--header-bg); border-radius: 14px; padding: 4px; gap: 4px; }
@@ -111,8 +111,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 10px 8px;
+      gap: 5px;
+      padding: 9px 6px;
       border-radius: 11px;
       color: #ddd6fe;
       font-weight: 600;
@@ -121,7 +121,7 @@
       transition: all 0.2s;
     }
     .tab.active { background: var(--tab-active-bg); color: var(--tab-active-text); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); }
-    .tab svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .tab svg { width: 15px; height: 15px; flex-shrink: 0; }
 
     .container { max-width: 500px; margin: 0 auto; padding: 12px; }
 
@@ -178,6 +178,8 @@
     [data-theme="dark"] .bar-purple { background: #2e1065; color: #ddd6fe; }
     .bar-red { background: #fee2e2; color: #7f1d1d; }
     [data-theme="dark"] .bar-red { background: #7f1d1d; color: #fee2e2; }
+    .bar-amber { background: #fef3c7; color: #78350f; }
+    [data-theme="dark"] .bar-amber { background: #78350f; color: #fef3c7; }
 
     .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; gap: 8px; }
     .row:last-child { margin-bottom: 0; }
@@ -199,6 +201,17 @@
     .row input.sum-sm { width: 95px; flex-shrink: 0; }
     .row label.kons-lbl { flex: 0 0 65px; }
     .row input:focus { border-color: var(--border-focus); }
+
+    .btn-calc-mini {
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
     /* Мульти-блоки (QR, ИВ) */
     .multi-block { background: var(--multi-bg); border-radius: 12px; padding: 10px; margin-bottom: 10px; }
@@ -246,13 +259,41 @@
     }
     .chip span { color: #ef4444; font-weight: bold; cursor: pointer; padding: 0 2px; }
 
+    /* ГСМ переключатель и результат */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--multi-bg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .toggle-row span { font-size: 13.5px; font-weight: 600; color: var(--text); }
+    .toggle-row input { width: 18px; height: 18px; accent-color: #7c3aed; }
+
+    .gsm-result-box {
+      background: var(--multi-bg);
+      border: 1px solid var(--multi-border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: center;
+    }
+    .gsm-stat-lbl { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
+    .gsm-stat-val { font-size: 17px; font-weight: 800; color: var(--border-focus); }
+
     /* Плашки */
     .total-pill {
       margin-top: 12px;
       padding: 11px 14px;
       border-radius: 12px;
       color: #fff;
-      font-weight: 850;
+      font-weight: 800;
       font-size: 13px;
       display: flex;
       justify-content: space-between;
@@ -287,6 +328,23 @@
     .btn-del { background: #ef4444; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; }
     .btn-edit { background: #f59e0b; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; color: #fff; }
     .btn-copy-sm { background: #169347; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; }
+    .btn-use { background: #6d28d9; padding: 7px 12px; font-size: 11.5px; border-radius: 8px; box-shadow: none; }
+
+    /* Подвкладки истории */
+    .sub-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+    .sub-tab {
+      flex: 1;
+      text-align: center;
+      padding: 9px;
+      border-radius: 10px;
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+    .sub-tab.active { background: #6d28d9; color: #fff; border-color: #6d28d9; }
 
     /* История */
     .history-item { background: var(--card-bg); border-radius: 16px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 10px var(--shadow); }
@@ -294,7 +352,7 @@
     .history-date { font-weight: 700; color: var(--border-focus); font-size: 14.5px; }
     .history-net { font-weight: 800; color: #169347; font-size: 15.5px; }
     .history-meta { font-size: 12.5px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; }
-    .history-btns { display: flex; gap: 6px; }
+    .history-btns { display: flex; gap: 6px; flex-wrap: wrap; }
     .hidden { display: none; }
 
     .toast {
@@ -324,21 +382,16 @@
     <div class="header-top">
       <div class="brand">
         <div class="brand-img">
-          <!-- Сжатая версия Газели -->
           <img src="https://lh3.googleusercontent.com/d/1XyOisCmsU_K0l2qD4Iov3GgYQO-W58rN=s100-c" alt="Газель">
         </div>
         <h1>БортЖурнал</h1>
       </div>
       <div class="header-actions">
-        <!-- Бэкап кнопка -->
-        <button class="btn-backup" onclick="exportData()" title="Бэкап (Скачать файл)">
+        <button class="btn-backup" onclick="exportData()" title="Скачать бэкап">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Бэкап</span>
         </button>
-        <button class="btn-backup" onclick="importData()" style="padding: 6px 8px;" title="Загрузить бэкап">
-          Импорт
-        </button>
-        <!-- Смена темы -->
+        <button class="btn-backup" onclick="importData()" title="Загрузить бэкап">Импорт</button>
         <button class="btn-icon" onclick="toggleTheme()" id="themeBtn">
           <svg id="moonIcon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.3-9.7.5-.1 1 .2 1.1.7.1.5-.2 1-.7 1.1-3.6.6-6.2 3.7-6.2 7.4 0 4.1 3.4 7.5 7.5 7.5 3.7 0 6.8-2.6 7.4-6.2.1-.5.6-.8 1.1-.7.5.1.8.6.7 1.1-.8 4.8-4.9 8.3-9.7 8.3z"/></svg>
           <svg id="sunIcon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -347,11 +400,15 @@
     </div>
 
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('form')">
+      <div class="tab active" id="tabBtn-form" onclick="switchTab('form')">
         <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="16" y="10" width="4" height="10" rx="1"/></svg>
-        <span>Текущий рейс</span>
+        <span>Рейс</span>
       </div>
-      <div class="tab" onclick="switchTab('history')">
+      <div class="tab" id="tabBtn-gsm" onclick="switchTab('gsm')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M15 11h2a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2v0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 4"/><rect x="6" y="6" width="6" height="5"/></svg>
+        <span>ГСМ</span>
+      </div>
+      <div class="tab" id="tabBtn-history" onclick="switchTab('history')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
         <span>История (<span id="histCount">0</span>)</span>
       </div>
@@ -359,8 +416,8 @@
   </div>
 </div>
 
+<!-- ВКЛАДКА 1: РЕЙС -->
 <div class="container" id="tab-form">
-  <!-- Дата / Маршрут / Водитель -->
   <div class="meta-card">
     <div class="meta-row">
       <div class="meta-col">
@@ -375,7 +432,7 @@
         </div>
       </div>
     </div>
-    
+
     <div style="height: 1px; background: var(--border);"></div>
 
     <div class="meta-row">
@@ -407,10 +464,10 @@
     </div>
   </div>
 
-  <!-- Св/н (теперь справочно, не в итогах!) -->
+  <!-- Св/н (справочно) -->
   <div class="card" style="padding: 11px 14px;">
     <div class="row">
-      <label style="font-weight:700; color: #a78bfa;">Св/н (сводная накладная) - Справочно</label>
+      <label style="font-weight:700; color: var(--border-focus);">Св/н (сводная накладная)</label>
       <input type="number" id="tripSvn" placeholder="0" inputmode="numeric" oninput="saveDraft()">
     </div>
   </div>
@@ -421,7 +478,6 @@
       <span>1. ПОСТУПЛЕНИЯ</span>
     </div>
 
-    <!-- Kaspi QR -->
     <div class="multi-block">
       <div class="multi-header">
         <span>Kaspi QR (чеки)</span>
@@ -434,7 +490,6 @@
       <div class="chips" id="chips-qr"></div>
     </div>
 
-    <!-- ИВ Kaspi -->
     <div class="multi-block">
       <div class="multi-header">
         <span>ИВ Kaspi</span>
@@ -447,7 +502,6 @@
       <div class="chips" id="chips-ivKaspi"></div>
     </div>
 
-    <!-- ИВ терминал -->
     <div class="multi-block">
       <div class="multi-header">
         <span>ИВ терминал</span>
@@ -460,7 +514,6 @@
       <div class="chips" id="chips-ivTerm"></div>
     </div>
 
-    <!-- Конс №1 и №2 с номером накладной -->
     <div class="row">
       <label class="kons-lbl">Конс №1</label>
       <input type="text" id="kons1Inv" class="inv-input" placeholder="№ накл." oninput="saveDraft()">
@@ -487,7 +540,11 @@
     <div class="card-header-bar bar-red">
       <span>2. РАСХОДЫ</span>
     </div>
-    <div class="row"><label>ГСМ</label><input type="number" class="exp" data-name="ГСМ" placeholder="0" inputmode="numeric" oninput="calc()"></div>
+    <div class="row">
+      <label>ГСМ</label>
+      <button class="btn-calc-mini" onclick="switchTab('gsm')">Калк</button>
+      <input type="number" id="expGsmInput" class="exp" data-name="ГСМ" placeholder="0" inputmode="numeric" oninput="calc()">
+    </div>
     <div class="row"><label>Платная дорога</label><input type="number" class="exp" data-name="Платная дорога" placeholder="0" inputmode="numeric" oninput="calc()"></div>
     <div class="row"><label>Обед</label><input type="number" class="exp" data-name="Обед" placeholder="0" inputmode="numeric" oninput="calc()"></div>
     <div class="row"><label>Тачка</label><input type="number" class="exp" data-name="Тачка" placeholder="0" inputmode="numeric" oninput="calc()"></div>
@@ -501,10 +558,10 @@
     </div>
   </div>
 
-  <!-- Сумма возврата (справочно, не влияет на итог) -->
+  <!-- Сумма возврата (справочно) -->
   <div class="card" style="padding: 12px 14px;">
     <div class="row">
-      <label style="font-weight:700; color:#b45309;">Сумма возврата (справочно)</label>
+      <label style="font-weight:700; color:#d97706;">Сумма возврата (справочно)</label>
       <input type="number" id="returnSum" placeholder="0" inputmode="numeric" oninput="saveDraft()">
     </div>
   </div>
@@ -514,7 +571,7 @@
     <div class="card-header-bar bar-purple">
       <span>3. ИТОГ РЕЙСА</span>
     </div>
-    <div class="summary-row"><span>Всего поступлений (без Св/н)</span><strong id="sumInc">0 ₸</strong></div>
+    <div class="summary-row"><span>Всего поступлений</span><strong id="sumInc">0 ₸</strong></div>
     <div class="summary-row"><span>Всего расходов</span><strong id="sumExp">0 ₸</strong></div>
 
     <div class="total-pill pill-green pill-net" id="netRow">
@@ -527,26 +584,74 @@
     </div>
   </div>
 
-  <!-- Кнопки действий -->
   <div class="actions">
     <button class="btn btn-save" onclick="saveTrip()">Сохранить рейс</button>
     <button class="btn btn-wa" onclick="copyCurrentWA()">В WhatsApp</button>
   </div>
 </div>
 
+<!-- ВКЛАДКА 2: КАЛЬКУЛЯТОР ГСМ -->
+<div class="container hidden" id="tab-gsm">
+  <div class="card">
+    <div class="card-header-bar bar-amber">
+      <span>⛽ КАЛЬКУЛЯТОР ГСМ</span>
+    </div>
+
+    <div class="row">
+      <label>Расстояние (км)</label>
+      <input type="number" id="gsmDist" placeholder="0" inputmode="decimal" oninput="calcGsm()">
+    </div>
+
+    <label class="toggle-row">
+      <span>Туда и обратно (×2)</span>
+      <input type="checkbox" id="gsmRound" onchange="calcGsm()">
+    </label>
+
+    <div class="row">
+      <label>Расход (л / 100 км)</label>
+      <input type="number" id="gsmCons" placeholder="15" inputmode="decimal" oninput="calcGsm()">
+    </div>
+
+    <div class="row">
+      <label>Цена топлива (₸ / л)</label>
+      <input type="number" id="gsmPrice" placeholder="205" inputmode="decimal" oninput="calcGsm()">
+    </div>
+
+    <div class="gsm-result-box">
+      <div>
+        <div class="gsm-stat-lbl">Нужно топлива</div>
+        <div class="gsm-stat-val" id="gsmLiters">0 л</div>
+      </div>
+      <div>
+        <div class="gsm-stat-lbl">Стоимость ГСМ</div>
+        <div class="gsm-stat-val" id="gsmCost" style="color:#169347;">0 ₸</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-wa" onclick="addGsmToTrip()">В расходы рейса</button>
+      <button class="btn btn-save" onclick="saveGsm()">Сохранить расчёт</button>
+    </div>
+  </div>
+</div>
+
+<!-- ВКЛАДКА 3: ИСТОРИЯ -->
 <div class="container hidden" id="tab-history">
+  <div class="sub-tabs">
+    <div class="sub-tab active" id="subTab-trips" onclick="switchHistSub('trips')">Рейсы (<span id="tripHistCount">0</span>)</div>
+    <div class="sub-tab" id="subTab-gsm" onclick="switchHistSub('gsm')">ГСМ (<span id="gsmHistCount">0</span>)</div>
+  </div>
   <div id="historyList"></div>
 </div>
 
-<!-- Скрытый инпут для импорта файлов -->
 <input type="file" id="importFile" class="hidden" accept=".json" onchange="handleImport(event)">
-
 <div class="toast" id="toast">Готово</div>
 
 <script>
   let lists = { qr: [], ivKaspi: [], ivTerm: [] };
-  let editingId = null; // Храним ID редактируемой поездки
-  const fmt = n => Number(n || 0).toLocaleString('ru-RU') + ' ₸';
+  let editingId = null;
+  let currentHistSub = 'trips';
+  const fmt = n => Math.round(Number(n || 0)).toLocaleString('ru-RU') + ' ₸';
   const sumArr = arr => (arr || []).reduce((a, b) => a + b, 0);
 
   function showToast(msg) {
@@ -566,7 +671,6 @@
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
   }
 
-  // Загрузка темы
   if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.setAttribute('data-theme', 'dark');
     document.getElementById('moonIcon').classList.add('hidden');
@@ -574,12 +678,21 @@
   }
 
   function switchTab(tab) {
-    document.querySelectorAll('.tab').forEach((el, i) => el.classList.toggle('active', (tab === 'form' && i === 0) || (tab === 'history' && i === 1)));
-    document.getElementById('tab-form').classList.toggle('hidden', tab !== 'form');
-    document.getElementById('tab-history').classList.toggle('hidden', tab !== 'history');
+    ['form', 'gsm', 'history'].forEach(t => {
+      document.getElementById('tabBtn-' + t).classList.toggle('active', tab === t);
+      document.getElementById('tab-' + t).classList.toggle('hidden', tab !== t);
+    });
     if (tab === 'history') renderHistory();
   }
 
+  function switchHistSub(sub) {
+    currentHistSub = sub;
+    document.getElementById('subTab-trips').classList.toggle('active', sub === 'trips');
+    document.getElementById('subTab-gsm').classList.toggle('active', sub === 'gsm');
+    renderHistory();
+  }
+
+  // --- РЕЙС ---
   function addItem(key) {
     const inp = document.getElementById('inp-' + key);
     const val = parseFloat(inp.value);
@@ -609,7 +722,6 @@
     const returnSum = parseFloat(document.getElementById('returnSum').value) || 0;
 
     const inc = {};
-    // Св/н НЕ учитывается в incTotal!
     let incTotal = sumArr(lists.qr) + sumArr(lists.ivKaspi) + sumArr(lists.ivTerm);
     document.querySelectorAll('.inc').forEach(el => {
       const v = parseFloat(el.value) || 0;
@@ -655,38 +767,81 @@
   }
 
   function saveDraft() {
-    const d = getFormData();
-    localStorage.setItem('trip_draft_v3', JSON.stringify(d));
+    localStorage.setItem('trip_draft_v3', JSON.stringify(getFormData()));
   }
 
   function loadDraft() {
     document.getElementById('tripDate').value = new Date().toISOString().split('T')[0];
     const raw = localStorage.getItem('trip_draft_v3');
-    if (!raw) return;
-    try {
-      const d = JSON.parse(raw);
-      if (d.driver) document.getElementById('tripDriver').value = d.driver;
-      if (d.date) document.getElementById('tripDate').value = d.date;
-      if (d.route) document.getElementById('tripRoute').value = d.route;
-      if (d.svn) document.getElementById('tripSvn').value = d.svn;
-      if (d.kons1Inv) document.getElementById('kons1Inv').value = d.kons1Inv;
-      if (d.kons2Inv) document.getElementById('kons2Inv').value = d.kons2Inv;
-      if (d.returnSum) document.getElementById('returnSum').value = d.returnSum;
-      if (d.comment) document.getElementById('tripComment').value = d.comment;
-      
-      lists.qr = d.qrList || [];
-      lists.ivKaspi = d.ivKaspiList || [];
-      lists.ivTerm = d.ivTermList || [];
-      ['qr', 'ivKaspi', 'ivTerm'].forEach(renderChips);
-      
-      document.querySelectorAll('.inc').forEach(el => { if (d.inc && d.inc[el.dataset.name]) el.value = d.inc[el.dataset.name]; });
-      document.querySelectorAll('.exp').forEach(el => { if (d.exp && d.exp[el.dataset.name]) el.value = d.exp[el.dataset.name]; });
-      
-      if (d.editingId) editingId = d.editingId;
-      calc();
-    } catch (e) {}
+    if (raw) {
+      try {
+        const d = JSON.parse(raw);
+        if (d.driver) document.getElementById('tripDriver').value = d.driver;
+        if (d.date) document.getElementById('tripDate').value = d.date;
+        if (d.route) document.getElementById('tripRoute').value = d.route;
+        if (d.svn) document.getElementById('tripSvn').value = d.svn;
+        if (d.kons1Inv) document.getElementById('kons1Inv').value = d.kons1Inv;
+        if (d.kons2Inv) document.getElementById('kons2Inv').value = d.kons2Inv;
+        if (d.returnSum) document.getElementById('returnSum').value = d.returnSum;
+        if (d.comment) document.getElementById('tripComment').value = d.comment;
+
+        lists.qr = d.qrList || [];
+        lists.ivKaspi = d.ivKaspiList || [];
+        lists.ivTerm = d.ivTermList || [];
+        ['qr', 'ivKaspi', 'ivTerm'].forEach(renderChips);
+
+        document.querySelectorAll('.inc').forEach(el => { if (d.inc && d.inc[el.dataset.name]) el.value = d.inc[el.dataset.name]; });
+        document.querySelectorAll('.exp').forEach(el => { if (d.exp && d.exp[el.dataset.name]) el.value = d.exp[el.dataset.name]; });
+        calc();
+      } catch (e) {}
+    }
+
+    // Загрузка сохранённых настроек ГСМ
+    const gsmPrefs = JSON.parse(localStorage.getItem('gsm_prefs') || '{}');
+    if (gsmPrefs.cons) document.getElementById('gsmCons').value = gsmPrefs.cons;
+    if (gsmPrefs.price) document.getElementById('gsmPrice').value = gsmPrefs.price;
+    calcGsm();
   }
 
+  // --- КАЛЬКУЛЯТОР ГСМ ---
+  function getGsmData() {
+    const dist = parseFloat(document.getElementById('gsmDist').value) || 0;
+    const round = document.getElementById('gsmRound').checked;
+    const cons = parseFloat(document.getElementById('gsmCons').value) || 0;
+    const price = parseFloat(document.getElementById('gsmPrice').value) || 0;
+    const totalDist = round ? dist * 2 : dist;
+    const liters = (totalDist * cons) / 100;
+    const cost = Math.round(liters * price);
+    return { id: Date.now(), date: new Date().toLocaleDateString('ru-RU'), dist, round, totalDist, cons, price, liters, cost };
+  }
+
+  function calcGsm() {
+    const g = getGsmData();
+    document.getElementById('gsmLiters').textContent = g.liters.toFixed(1) + ' л';
+    document.getElementById('gsmCost').textContent = fmt(g.cost);
+    localStorage.setItem('gsm_prefs', JSON.stringify({ cons: g.cons || '', price: g.price || '' }));
+  }
+
+  function addGsmToTrip(customCost) {
+    const cost = customCost !== undefined ? customCost : getGsmData().cost;
+    if (!cost) { showToast('Сначала посчитай ГСМ'); return; }
+    document.getElementById('expGsmInput').value = cost;
+    calc();
+    switchTab('form');
+    showToast(`ГСМ (${fmt(cost)}) добавлен в рейс!`);
+  }
+
+  function saveGsm() {
+    const g = getGsmData();
+    if (!g.cost) { showToast('Введи расстояние, расход и цену'); return; }
+    const hist = JSON.parse(localStorage.getItem('gsm_history') || '[]');
+    hist.unshift(g);
+    localStorage.setItem('gsm_history', JSON.stringify(hist));
+    updateHistCount();
+    showToast('Расчёт ГСМ сохранён!');
+  }
+
+  // --- WHATSAPP ---
   function formatMultiLine(label, arr) {
     if (!arr || !arr.length) return '';
     const total = sumArr(arr);
@@ -697,7 +852,7 @@
   function formatWA(d) {
     let txt = `🚚 *ОТЧЁТ О РЕЙСЕ*\n👤 Водитель: ${d.driver || 'Не указан'}\n📅 Дата: ${d.date}\n📍 Маршрут: ${d.route}\n`;
     if (d.svn) txt += `💵 Св/н (справочно): ${fmt(d.svn)}\n`;
-    txt += `\n💰 *ПОСТУПЛЕНИЯ (без Св/н): ${fmt(d.incTotal)}*\n`;
+    txt += `\n💰 *ПОСТУПЛЕНИЯ: ${fmt(d.incTotal)}*\n`;
     txt += formatMultiLine('Kaspi QR', d.qrList);
     txt += formatMultiLine('ИВ Kaspi', d.ivKaspiList);
     txt += formatMultiLine('ИВ терминал', d.ivTermList);
@@ -738,25 +893,23 @@
     showToast('Скопировано для WhatsApp!');
   }
 
-  function copyCurrentWA() {
-    copyText(formatWA(getFormData()));
-  }
+  function copyCurrentWA() { copyText(formatWA(getFormData())); }
 
-  // Бэкап: Экспорт в файл
+  // --- БЭКАП (РЕЙСЫ + ГСМ) ---
   function exportData() {
-    const history = localStorage.getItem('trip_history') || '[]';
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(history);
-    const dlAnchorElem = document.createElement('a');
-    dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", `История_Рейсов_${new Date().toLocaleDateString('ru-RU')}.json`);
-    dlAnchorElem.click();
-    showToast('История скачана!');
+    const payload = {
+      trips: JSON.parse(localStorage.getItem('trip_history') || '[]'),
+      gsm: JSON.parse(localStorage.getItem('gsm_history') || '[]')
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload));
+    const a = document.createElement('a');
+    a.setAttribute("href", dataStr);
+    a.setAttribute("download", `БортЖурнал_Бэкап_${new Date().toLocaleDateString('ru-RU')}.json`);
+    a.click();
+    showToast('Бэкап скачан!');
   }
 
-  // Бэкап: Импорт из файла
-  function importData() {
-    document.getElementById('importFile').click();
-  }
+  function importData() { document.getElementById('importFile').click(); }
 
   function handleImport(event) {
     const file = event.target.files[0];
@@ -764,20 +917,21 @@
     const reader = new FileReader();
     reader.onload = function(e) {
       try {
-        const imported = JSON.parse(e.target.result);
-        if (Array.isArray(imported)) {
-          const current = JSON.parse(localStorage.getItem('trip_history') || '[]');
-          // Объединяем, избегая дубликатов по ID
-          const combined = [...imported, ...current];
-          const unique = combined.filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
-          
-          localStorage.setItem('trip_history', JSON.stringify(unique));
-          updateHistCount();
-          renderHistory();
-          showToast('Данные успешно импортированы!');
-        } else {
-          showToast('Ошибка: неверный формат файла');
-        }
+        const parsed = JSON.parse(e.target.result);
+        const importedTrips = Array.isArray(parsed) ? parsed : (parsed.trips || []);
+        const importedGsm = Array.isArray(parsed) ? [] : (parsed.gsm || []);
+
+        const curTrips = JSON.parse(localStorage.getItem('trip_history') || '[]');
+        const uniqTrips = [...importedTrips, ...curTrips].filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
+        localStorage.setItem('trip_history', JSON.stringify(uniqTrips));
+
+        const curGsm = JSON.parse(localStorage.getItem('gsm_history') || '[]');
+        const uniqGsm = [...importedGsm, ...curGsm].filter((v, i, a) => a.findIndex(t => t.id === v.id) === i);
+        localStorage.setItem('gsm_history', JSON.stringify(uniqGsm));
+
+        updateHistCount();
+        renderHistory();
+        showToast('Бэкап загружен!');
       } catch (err) {
         showToast('Ошибка чтения файла');
       }
@@ -785,29 +939,24 @@
     reader.readAsText(file);
   }
 
+  // --- СОХРАНЕНИЕ И ИСТОРИЯ ---
   function saveTrip() {
     const d = getFormData();
     if (d.incTotal === 0 && d.expTotal === 0 && d.returnSum === 0) {
       showToast('Сначала введи хоть какие-то суммы');
       return;
     }
-    
     let hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
-    
     if (editingId) {
-      // Если редактировали — перезаписываем рейс
       hist = hist.map(x => x.id === editingId ? d : x);
       editingId = null;
-      showToast('Рейс успешно изменен!');
+      showToast('Рейс обновлён!');
     } else {
-      // Новый рейс
       hist.unshift(d);
-      showToast('Рейс сохранен в историю!');
+      showToast('Рейс сохранён!');
     }
-    
     localStorage.setItem('trip_history', JSON.stringify(hist));
 
-    // Очистка
     lists = { qr: [], ivKaspi: [], ivTerm: [] };
     ['qr', 'ivKaspi', 'ivTerm'].forEach(renderChips);
     document.querySelectorAll('.inc, .exp').forEach(el => el.value = '');
@@ -818,7 +967,6 @@
     document.getElementById('tripComment').value = '';
     document.getElementById('tripDate').value = new Date().toISOString().split('T')[0];
     localStorage.removeItem('trip_draft_v3');
-    
     calc();
     updateHistCount();
   }
@@ -828,7 +976,6 @@
     const d = hist.find(x => x.id === id);
     if (!d) return;
 
-    // Загружаем данные в форму
     editingId = d.id;
     document.getElementById('tripDriver').value = d.driver || 'Нурлан';
     document.getElementById('tripDate').value = d.date;
@@ -844,65 +991,96 @@
     lists.ivTerm = d.ivTermList || [];
     ['qr', 'ivKaspi', 'ivTerm'].forEach(renderChips);
 
-    // Сбрасываем и вставляем числовые инпуты
     document.querySelectorAll('.inc, .exp').forEach(el => el.value = '');
     document.querySelectorAll('.inc').forEach(el => { if (d.inc && d.inc[el.dataset.name]) el.value = d.inc[el.dataset.name]; });
     document.querySelectorAll('.exp').forEach(el => { if (d.exp && d.exp[el.dataset.name]) el.value = d.exp[el.dataset.name]; });
 
     calc();
     switchTab('form');
-    showToast('Рейс загружен для изменения!');
+    showToast('Рейс открыт для правки');
   }
 
   function updateHistCount() {
-    const hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
-    document.getElementById('histCount').textContent = hist.length;
+    const t = JSON.parse(localStorage.getItem('trip_history') || '[]').length;
+    const g = JSON.parse(localStorage.getItem('gsm_history') || '[]').length;
+    document.getElementById('histCount').textContent = t + g;
+    document.getElementById('tripHistCount').textContent = t;
+    document.getElementById('gsmHistCount').textContent = g;
   }
 
   function deleteTrip(id) {
     if (!confirm('Удалить этот отчёт?')) return;
     let hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
-    hist = hist.filter(x => x.id !== id);
-    localStorage.setItem('trip_history', JSON.stringify(hist));
+    localStorage.setItem('trip_history', JSON.stringify(hist.filter(x => x.id !== id)));
+    updateHistCount();
+    renderHistory();
+  }
+
+  function deleteGsm(id) {
+    if (!confirm('Удалить расчёт ГСМ?')) return;
+    let hist = JSON.parse(localStorage.getItem('gsm_history') || '[]');
+    localStorage.setItem('gsm_history', JSON.stringify(hist.filter(x => x.id !== id)));
     updateHistCount();
     renderHistory();
   }
 
   function copyHistWA(id) {
-    const hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
-    const item = hist.find(x => x.id === id);
+    const item = JSON.parse(localStorage.getItem('trip_history') || '[]').find(x => x.id === id);
     if (item) copyText(formatWA(item));
   }
 
   function renderHistory() {
-    const hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
     const box = document.getElementById('historyList');
-    if (!hist.length) {
-      box.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:30px;">История пока пустая</div>';
-      return;
+    if (currentHistSub === 'trips') {
+      const hist = JSON.parse(localStorage.getItem('trip_history') || '[]');
+      if (!hist.length) {
+        box.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:30px;">История рейсов пока пустая</div>';
+        return;
+      }
+      box.innerHTML = hist.map(d => `
+        <div class="history-item">
+          <div class="history-top">
+            <span class="history-date">${d.date} (${d.driver || 'Водитель'})</span>
+            <span class="history-net">${fmt(d.net)}</span>
+          </div>
+          <div class="history-meta">
+            📍 ${d.route}<br>
+            Поступления: <b>${fmt(d.incTotal)}</b> | Расходы: <b>${fmt(d.expTotal)}</b>
+            ${d.svn ? '<br>Св/н: <b>' + fmt(d.svn) + '</b>' : ''}
+            ${d.returnSum ? '<br>Возврат: <b>' + fmt(d.returnSum) + '</b>' : ''}
+            ${d.kons1Inv ? '<br>Конс №1 накл.: <b>' + d.kons1Inv + '</b>' : ''}
+            ${d.kons2Inv ? '<br>Конс №2 накл.: <b>' + d.kons2Inv + '</b>' : ''}
+            ${d.comment ? '<br>📝 ' + d.comment : ''}
+          </div>
+          <div class="history-btns">
+            <button class="btn btn-copy-sm" onclick="copyHistWA(${d.id})">В WhatsApp</button>
+            <button class="btn btn-edit" onclick="editTrip(${d.id})">Изменить</button>
+            <button class="btn btn-del" onclick="deleteTrip(${d.id})">Удалить</button>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      const hist = JSON.parse(localStorage.getItem('gsm_history') || '[]');
+      if (!hist.length) {
+        box.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:30px;">История ГСМ пока пустая</div>';
+        return;
+      }
+      box.innerHTML = hist.map(g => `
+        <div class="history-item">
+          <div class="history-top">
+            <span class="history-date">${g.date} • ${g.totalDist} км ${g.round ? '(×2)' : ''}</span>
+            <span class="history-net">${fmt(g.cost)}</span>
+          </div>
+          <div class="history-meta">
+            Топливо: <b>${g.liters.toFixed(1)} л</b> (расход ${g.cons} л/100км по ${g.price} ₸)
+          </div>
+          <div class="history-btns">
+            <button class="btn btn-use" onclick="addGsmToTrip(${g.cost})">В рейс</button>
+            <button class="btn btn-del" onclick="deleteGsm(${g.id})">Удалить</button>
+          </div>
+        </div>
+      `).join('');
     }
-    box.innerHTML = hist.map(d => `
-      <div class="history-item">
-        <div class="history-top">
-          <span class="history-date">${d.date} (${d.driver || 'Водитель'})</span>
-          <span class="history-net">${fmt(d.net)}</span>
-        </div>
-        <div class="history-meta">
-          📍 ${d.route}<br>
-          Поступления: <b>${fmt(d.incTotal)}</b> | Расходы: <b>${fmt(d.expTotal)}</b>
-          ${d.svn ? '<br>Сводная накладная: <b>' + fmt(d.svn) + '</b>' : ''}
-          ${d.returnSum ? '<br>Возврат: <b>' + fmt(d.returnSum) + '</b>' : ''}
-          ${d.kons1Inv ? '<br>Конс №1 накл.: <b>' + d.kons1Inv + '</b>' : ''}
-          ${d.kons2Inv ? '<br>Конс №2 накл.: <b>' + d.kons2Inv + '</b>' : ''}
-          ${d.comment ? '<br>📝 ' + d.comment : ''}
-        </div>
-        <div class="history-btns">
-          <button class="btn btn-copy-sm" onclick="copyHistWA(${d.id})">В WhatsApp</button>
-          <button class="btn btn-edit" onclick="editTrip(${d.id})">Изменить</button>
-          <button class="btn btn-del" onclick="deleteTrip(${d.id})">Удалить</button>
-        </div>
-      </div>
-    `).join('');
   }
 
   loadDraft();
